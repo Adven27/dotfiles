@@ -1,0 +1,107 @@
+##################################################  Fonts  ########################################################
+
+URxvt*font:				xft:Menlo//-//Regular:size=14,style=regular
+URxvt*boldFont:				xft:Menlo//-//Regular:size=14, style=regular
+URxvt*letterSpace:			-2
+URxvt*allow_bold:			true
+
+
+###################################################################################################################
+##################################################  Colors  #######################################################
+
+! special
+*.foreground:   #bec7d5
+*.background:   #343740
+*.cursorColor:  #bec7d5
+
+
+! black
+*.color0:       #181c22
+*.color8:       #ee4ff5
+
+! red
+*.color1:       #20252c
+*.color9:       #EC709A
+
+! green
+*.color2:       #5c90d3
+*.color10:      #4A9BE0
+
+! yellow
+*.color3:       #6DB3A0
+*.color11:      #359fee
+
+! blue
+*.color4:       #5e6a7b
+*.color12:      #E98BEE
+
+! magenta
+*.color5:       #7e8ea3
+*.color13:      #5DCE49
+
+! cyan
+*.color6:       #8DADD9
+*.color14:      #48EA57
+
+! white
+*.color7:       #5c616c
+*.color15:      #CE59BC
+
+
+
+###################################################################################################################
+###########################################  Enable link support  #################################################
+
+URxvt.perl-ext-common:			default,matcher,tabbedex,vtwheel,clipboard
+!URxvt.matcher.button:			1
+URxvt.perl-ext:				default,url-select
+URxvt.keysym.M-u:			perl:url-select:select_next
+URxvt.url-select.launcher:		/usr/bin/google-chrome
+URxvt.url-select.underline:		true
+
+
+###################################################################################################################
+###############################################  Disable bell  ####################################################
+
+URxvt.insecure: 			false
+
+
+###################################################################################################################
+###################################3#####  Copy / paste keybindings  ##############################################
+
+URxvt.keysym.M-c: 			perl:clipboard:copy
+URxvt.keysym.M-v: 			perl:clipboard:pasteq
+
+
+###################################################################################################################
+###########################################  Scrollbar / cursor  ##################################################
+
+URxvt*saveLines: 			300000
+URxvt.scrollBar: 			false
+!URxvt*scrollstyle:			plain
+URxvt*cursorBlink: 			false
+URxvt*cursorUnderline: 		        true
+URxvt*cursorColor: 			#51c4d4
+
+
+###################################################################################################################
+##################################################  Tabs  #########################################################
+
+URxvt.tabbedex.autohide:		yes
+URxvt.tabbedex.tabbar-fg:		2
+URxvt.tabbedex.tabbar-bg:		0
+URxvt.tabbedex.tab-fg:			10
+URxvt.tabbedex.tab-bg:			0
+URxvt.tabbedex.title:			yes
+URxvt.tabbedex.new-button:		no
+
+
+###################################################################################################################
+#############################################  Toggle fullscreen  #################################################
+
+URxvt.keysym.F11: 			perl:fullscreen:switch
+
+###################################################################################################################
+#################################################  Geometry  ######################################################
+
+URxvt.geometry: 96x42+50+74

@@ -1,0 +1,584 @@
+[global/wm]
+margin-top = 5
+margin-bottom = 5
+
+[colors]
+white = #d1d1d1
+gray = #585858
+black = #090909
+red = #c795ae
+blue = #95aec7
+yellow = #c7ae95
+green = #aec795
+
+background = #cc222222
+background-alt = #cc666666
+background-opaque = #222222
+foreground = #dfdfdf
+foreground-alt = #5e81b1
+primary = #ffb52a
+secondary = #e60053
+alert = #bd2c40
+
+good = ${xrdb:*color2:#0000ff}
+nominal = ${xrdb:*color3:#00ff00}
+degraded = ${xrdb:*color1:#ff0000}
+
+[bar/bar0]
+bottom = false
+dock = false
+wm-restack = i3
+width = 100%
+height = 25
+
+enable-ipc = true
+
+padding-left = 0
+padding-right = 1
+
+module-margin-right = 1
+module-margin-left = 0
+
+modules-right = xkeyboard battery volume2 redshift backlight
+modules-center = date2 weather
+modules-left = mpd xwindow
+
+background = #66090909
+foreground = ${colors.white}
+
+underline-size = 2
+underline-color = ${colors.white}
+
+tray-detached = false
+tray-position =
+tray-offset-x = 
+tray-maxsize = 
+tray-padding = 
+
+font-0 = hack:pixelsize=12;1
+font-1 = unifont:pixelsize=10:heavy:fontformat=truetype;-2
+font-2 = siji:pixelsize=10;0
+font-3 = FontAwesome:pixelsize=14;0
+
+[bar/bar1]
+;monitor = ${env:MONITOR:DP-0}
+width = 100%
+height = 25
+offset-x = 0
+offset-y = 5
+dock = false
+wm-restack = i3
+
+bottom = true
+
+background = #00000000
+foreground = #555555
+
+spacing = 0
+padding-left = 1
+padding-right = 0
+module-margin-left = 2
+module-margin-right = 0
+
+font-0 = hack:pixelsize=12;1
+font-1 = unifont:size=6:heavy:fontformat=truetype;-2
+font-2 = siji:pixelsize=10;0
+font-3 = FontAwesome:pixelsize=14;0
+
+modules-left = menu0 cpu3 memory2 temperature
+modules-center = i3
+modules-right = filesystem bspwm wlan eth pkg
+
+tray-position =
+tray-padding = 0
+tray-transparent = true
+
+override-redirect = true
+
+scroll-up = i3wm-wsnext
+scroll-down = i3wm-wsprev
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = true
+strip-wsnumbers = true
+pin-workspaces = true
+
+label-mode-padding = 5
+label-mode-foreground = #ffffff
+
+label-unfocused-foreground = #555555
+label-focused-foreground = #ffffff
+
+label-focused-font = 4
+label-unfocused-font = 4
+label-urgent-font = 4
+label-visible-font = 4 
+
+label-focused-padding = 1
+
+label-unfocused-padding = 1
+label-unfocused-underlinde = ${colors.white}
+
+label-urgent-padding = 1
+label-urgent-foreground = ${colors.red}
+
+label-visible-foreground = ${colors.white}
+label-visible-padding = 1
+
+[module/date]
+type = internal/date
+interval = 5
+
+date = "%d.%m.%y"
+date-alt = " %d"
+
+time = " %H:%M:%S"
+time-alt =  %H:%M
+
+label = %date% %time%
+
+[module/volume]
+type = internal/volume
+
+format-volume = <label-volume> <bar-volume>
+label-volume = ""
+label-volume-foreground = ${root.foreground}
+label-muted = ""
+
+bar-volume-width = 10
+bar-volume-foreground-0 = #55aa55
+bar-volume-foreground-1 = #55aa55
+bar-volume-foreground-2 = #55aa55
+bar-volume-foreground-3 = #55aa55
+bar-volume-foreground-4 = #55aa55
+bar-volume-foreground-5 = #f5a70a
+bar-volume-foreground-6 = #ff5555
+bar-volume-gradient = false
+bar-volume-indicator = │
+bar-volume-indicator-font = 2
+bar-volume-indicator-foreground = #ff
+bar-volume-fill = ─
+bar-volume-fill-font = 2
+bar-volume-empty = ─
+bar-volume-empty-font = 2
+bar-volume-empty-foreground = 
+
+[module/xwindow]
+type = internal/xwindow
+label = %title%
+label-maxlen = 60
+
+[module/bspwm]
+type = internal/bspwm
+ws-icon-default = x
+
+label-active = %index%
+label-active-background = #ee333333
+label-active-underline= #cc333333
+label-active-padding = 2
+
+label-occupied = %index%
+label-occupied-padding = 2
+
+label-urgent = %index%
+label-urgent-background = #bd2c40
+label-urgent-padding = 2
+
+label-empty = %index%
+label-empty-foreground = #55
+label-empty-padding = 2
+
+[module/mpd2]
+type = internal/mpd
+
+host = 127.0.0.1
+port = 6600
+
+interval = 1
+
+format-online = <label-song>
+format-online-underline = #0a6cf5
+label-song = %album:0:50:...% - %title:0:50:...%
+
+[module/mpd]
+type = internal/mpd
+
+host = 127.0.0.1
+port = 4200
+
+intervel = 2
+
+format-online = <label-song> <icon-prev> <icon-play> <icon-pause> <icon-next> 
+format-offline = <label-offline>
+
+label-offline =  no music
+label-offline-foreground = ${colors.gray}
+
+label-song = %artist% - %title%
+label-song-maxlen = 95
+label-song-ellipsis = true
+
+icon-prev = 
+icon-seekb = <<
+icon-stop = o
+icon-pause = 
+icon-play = 
+icon-next = 
+icon-seekf = >>
+
+icon-random = S
+icon-repeat = R
+
+toggle-on-foreground = #e60053
+toggle-off-foreground = #66
+
+[module/backlight]
+type = internal/xbacklight
+
+format = <ramp> 
+label = %percentage%%
+
+ramp-0 = 🌕
+ramp-1 = 🌔
+ramp-2 = 🌓
+ramp-3 = 🌒
+ramp-4 = 🌑
+
+; Only applies if <bar> is used
+bar-width = 10
+bar-indicator = |
+bar-fill = ─
+bar-empty = ─
+
+[module/wlan]
+type = internal/network
+interface = wlp3s0
+interval = 3.0
+
+format-connected-padding = 1
+format-disconnected-padding = 1
+
+format-connected = <label-connected>
+format-connected-underline = ${colors.white}
+format-disconnected-underline = ${colors.gray}
+
+label-connected = %essid% %downspeed:7% %upspeed:7%
+label-disconnected = 
+label-disconnected-foreground = ${colors.gray}
+
+
+[module/eth]
+type = internal/network
+interface = enp2s0
+interval = 3.0
+
+format-connected-padding = 1
+format-disconnected-padding = 1
+
+format-connected-underline = ${colors.white}
+format-disconnected-underline = ${colors.gray}
+
+label-connected =  
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = AC
+full-at = 90
+time-format = %H:%M
+
+format-charging = <animation-charging> <label-charging>
+format-charging-underline = ${colors.green}
+format-charging-padding = 1
+
+label-discharging = %time%
+format-discharging = <ramp-capacity> <label-discharging>
+format-discharging-underline = ${colors.red}
+format-discharging-padding = 1
+
+format-full = 
+format-full-underline = 
+format-full-overline = ${self.format-charging-underline}
+format-full-padding = 1
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-foreground = ${colors.white}
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-foreground = ${colors.green}
+animation-charging-framerate = 500
+
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 0
+warn-temperature = 60
+
+format = <label>
+format-warn = <label-warn>
+format-padding = 1
+format-warn-padidng = 1
+
+label = 
+label-warn =  %temperature%
+label-warn-foreground = ${colors.red}
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-foreground = #55
+
+[module/temperature2]
+type = internal/temperature
+thermal-zone = 0
+warn-temperature = 65
+
+interval = 1
+
+format = <ramp> <label>
+format-underline = ${colors.nominal}
+
+format-warn = <ramp> <label-warn>
+format-warn-underline = ${colors.degraded}
+
+label = %temperature%
+label-warn = %temperature%
+label-warn-foreground = ${colors.degraded}
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-3 = 
+ramp-4 = 
+
+[module/menu0]
+type = custom/menu
+
+format = <label-toggle> <menu>
+format-underline = ${colors.white}
+format-padding = 1
+ 
+menu-0-0 =  shutdown
+menu-0-0-exec = shutdown now
+menu-0-1 =  restart
+menu-0-1-exec = shutdown -r now
+
+label-open =   
+label-close = 
+label-separator = " "
+
+[module/powermenu]
+type = custom/menu
+
+label-open =  power
+label-open-foreground = #e60053
+label-close =  cancel
+label-close-foreground = #e60053
+label-separator = |
+label-separator-foreground = #55
+
+menu-0-0 = reboot
+menu-0-0-exec = menu-open-1
+menu-0-1 = power off
+menu-0-1-exec = menu-open-2
+
+menu-1-0 = cancel
+menu-1-0-exec = menu-open-0
+menu-1-1 = reboot
+menu-1-1-exec = sudo reboot
+
+menu-2-0 = power off
+menu-2-0-exec = sudo poweroff
+menu-2-1 = cancel
+menu-2-1-exec = menu-open-0
+
+
+[module/date2]
+type = internal/date
+date-alt =   %A %H:%M 
+date =   %d %A %H:%M 
+interval = 5
+;format-underline = ${colors.white}
+;format-background = ${colors.black}
+format-foreground = ${colors.white}
+format-padding = 1
+
+[module/volume2]
+type = internal/volume
+
+format-volume = <bar-volume>
+
+label-volume = VOL
+label-volume-foreground = ${root.foreground}
+
+label-muted =  sound muted
+label-muted-foreground = ${colors.gray}
+
+bar-volume-width = 10
+bar-volume-foreground-0 = ${colors.blue}
+bar-volume-foreground-1 = ${colors.blue}
+bar-volume-foreground-2 = ${colors.green}
+bar-volume-foreground-3 = ${colors.green}
+bar-volume-foreground-4 = ${colors.white}
+bar-volume-foreground-5 = ${colors.white}
+bar-volume-gradient = false
+bar-volume-indicator = 
+bar-volume-indicator-font = 4
+bar-volume-indicator-foreground = ${colors.white}
+bar-volume-fill = 
+bar-volume-fill-font = 4
+bar-volume-empty = 
+bar-volume-empty-font = 4
+bar-volume-empty-foreground = ${colors.gray}
+
+[module/updates2]
+type = custom/script
+interval = 600
+format = <label>
+format-underline = ${xrdb:*.color4}
+label = "%output:0:30%"
+exec = checkupdates
+;exec-if = ping -w 2 -c 1 8.8.8.8
+
+[module/pkg]
+type = custom/script
+interval = 3600
+format = <label>
+format-underline = #dc322f
+label = "%output:0:30%"
+exec = ~/.config/polybar/pkg.sh
+exec-if = "ping -q -w 2 -c 1 176.34.135.167 > /dev/null"
+
+[module/date3]
+type = internal/date
+interval = 1
+
+date = %Y-%m-%d
+date-alt = ${self.date}
+
+time = %H:%M:%S
+time-alt = ${self.time}
+
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+format-underline = #0a6cf5
+
+label = %date% %time%
+
+[module/volume3]
+type = internal/volume
+
+format-volume = <ramp-volume> <label-volume>
+label-volume = %percentage:3:3%%
+label-volume-foreground = ${root.foreground}
+
+format-muted = <label-muted>
+label-muted = muted
+label-muted-foreground = #66
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+
+[module/xkeyboard]
+type = internal/xkeyboard
+label-layout = %layout% 
+format-underline =
+
+[module/filesystem]
+type = internal/fs
+interval = 25
+
+mount-0 = /
+;mount-1 = /home
+;mount-2 = /invalid/mountpoint
+
+label-mounted =  %mountpoint% %free%
+label-mounted-underline = ${colors.white}
+label-mounted-padding = 1
+
+label-unmounted =
+label-unmounted-foreground = ${colors.black}
+
+[module/cpu3]
+type = internal/cpu
+interval = 2
+format = <ramp-coreload>
+label =  %percentage-cores%
+
+ramp-coreload-0 = ▁
+ramp-coreload-1 = ▂
+ramp-coreload-2 = ▃
+ramp-coreload-3 = ▄
+ramp-coreload-4 = ▅
+ramp-coreload-5 = ▆
+ramp-coreload-6 = ▇
+ramp-coreload-7 = █
+
+[module/memory2]
+type = internal/memory
+interval = 2
+
+label-underline = ${colors.white}
+label-foreground = ${colors.white}
+
+format-prefix = 
+; Available tags:
+;   <label> (default)
+;   <bar-used>
+;   <bar-free>
+format = <bar-used>
+; Available tokens:
+;   %percentage_used% (default)
+;   %percentage_free%
+;   %gb_used%
+;   %gb_free%
+;   %gb_total%
+;   %mb_used%
+;   %mb_free%
+;   %mb_total%
+label = %percentage_used%
+
+; Only applies if <bar-used> is used
+bar-used-indicator =
+bar-used-width = 11
+bar-used-foreground-0 = ${colors.blue}
+bar-used-foreground-1 = ${colors.green}
+bar-used-foreground-2 = ${colors.yellow}
+bar-used-foreground-3 = ${colors.red}
+bar-used-fill = ▐
+bar-used-empty = ▐
+bar-used-empty-foreground = ${colors.gray}
+
+
+[module/demo]
+type = custom/ipc
+hook-0 = echo "Files in ${HOME}: $(ls -1a ~ | wc -l)"
+hook-1 = whoami
+hook-2 = date +%s
+initial = 2
+click-left = polybar-msg -p %pid% hook demo 1
+click-right = polybar-msg -p %pid% hook demo 2
+double-click-left = polybar-msg -p %pid% hook demo 3
+
+[module/weather]
+type = custom/script
+interval = 300
+format = <label>
+format-prefix = 
+format-prefix-foreground = ${colors.white}
+exec = ~/.config/polybar/weather.sh
+
+[module/redshift]
+type = custom/script
+interval = 5
+exec = ~/.config/polybar/redshift.sh
