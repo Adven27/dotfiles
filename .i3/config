@@ -1,9 +1,9 @@
-# i3 config file (v4)
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
 set $mod Mod4
 
+set $border-color #ffffff
 set $bg-color #2f343f
 set $inact-bg-color #2f343f
 set $text-color #f3f4f5
@@ -43,6 +43,8 @@ bindsym $mod+Shift+q kill
 #bindsym $mod+d exec --no-startup-id dmenu_recency
 # start dmenu (a program launcher)
 bindsym $mod+d exec --no-startup-id rofi -modi combi -show combi -lines 15 #-eh 2 -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 18"
+bindsym $mod+Tab exec --no-startup-id rofi -show window -lines 15 #-eh 2 -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 18"
+
 
 # launch categorized menu
 bindsym $mod+z exec --no-startup-id morc_menu
@@ -65,11 +67,14 @@ bindsym $mod+Ctrl+m exec pavucontrol
 
 # Start Applications
 bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
-bindsym $mod+F2 exec google-chrome-stable
-bindsym $mod+F3 exec pcmanfm
-# bindsym $mod+F3 exec ranger
-bindsym $mod+Shift+F3 exec gksu pcmanfm
-bindsym $mod+F5 exec terminal -e 'mocp'
+bindsym $mod+F1 exec google-chrome-stable
+bindsym $mod+F2 exec google-chrome-stable --app=https://youtube.com
+bindsym $mod+F3 exec google-chrome-stable --app=https://radio.yandex.ru/user/n.toropanov
+bindsym $mod+F4 exec terminal -e 'ranger'
+bindsym $mod+F5 exec pcmanfm
+bindsym $mod+F6 exec terminal -e 'mocp'
+bindsym $mod+Shift+F5 exec gksu pcmanfm
+bindsym $mod+Shift+F4 exec gksu terminal -e 'ranger'
 bindsym $mod+t exec --no-startup-id pkill compton
 bindsym $mod+Ctrl+t exec --no-startup-id compton -b
 bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
@@ -78,6 +83,7 @@ bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
 bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
 bindsym $mod+Shift+h exec xdg-open /usr/share/doc/manjaro/i3_help.pdf
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
+bindsym $mod+x exec --no-startup-id xautolock -toggle 
 
 # focus_follows_mouse no
 
@@ -119,8 +125,8 @@ bindsym $mod+q split toggle
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
+bindsym $mod+s layout stacking;exec notify-send 'stacking: $mod+e for split'
+bindsym $mod+w layout tabbed;exec notify-send 'tabbed: $mod+e for split'
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
@@ -136,28 +142,25 @@ bindsym $mod+Shift+s sticky toggle
 bindsym $mod+a focus parent
 
 # move the currently focused window to the scratchpad
-bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+Shift+grave move scratchpad
 
 # Show the next scratchpad window or hide the focused scratchpad window.
 # If there are multiple scratchpad windows, this command cycles through them.
-bindsym $mod+minus scratchpad show
+bindsym $mod+grave scratchpad show
 
 #navigate workspaces next / previous
 bindsym $mod+Ctrl+Right workspace next
 bindsym $mod+Ctrl+Left workspace prev
 
 # Workspace names
-# to display names or symbols instead of plain workspace numbers you can use
-# something like: set $ws1 1:mail
-#                 set $ws2 2:
 set $ws1 "1:"
 set $ws2 "2:"
 set $ws3 "3:"
 set $ws4 "4:"
 set $ws5 "5:"
-set $ws6 6
-set $ws7 7
-set $ws8 8
+set $ws6 "6:"
+set $ws7 "7:"
+set $ws8 "8:"
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -190,14 +193,15 @@ bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 
 # Open applications on specific workspaces
-#assign [instance="^music.yandex.ru$"] $ws10
+assign [instance="^radio.yandex.ru"] $ws8
 assign [class="chrome"] $ws1
 assign [class="^jetbrains-idea$"] $ws2
 assign [class="^jetbrains-studio$"] $ws2
+assign [class="^Code$"] $ws2
 assign [class="^TelegramDesktop$"] $ws3
 assign [class="^wmail$"] $ws3
 assign [class="^Doublecmd$"] $ws4
-assign [class="^Code$"] $ws2
+assign [class="^Steam$"] $ws6
 
 
 # Open specific applications in floating mode
@@ -298,7 +302,7 @@ exec --no-startup-id clipit
 # exec_always --no-startup-id sbxkb
 exec --no-startup-id start_conky_maia
 
-exec --no-startup-id xautolock -time 10 -locker blurlock -corners -000
+exec --no-startup-id xautolock -time 10 -notify 10 -notifier ~/.i3/prelock.sh  -locker blurlock -corners -000
 exec_always --no-startup-id fix_xcursor
 exec --no-startup-id redshift
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
@@ -339,7 +343,7 @@ bindsym $mod+m bar mode toggle
 
 
 # class                 border           backgr.          text              indicator child_border
-client.focused          $bg-color        $bg-color        $text-color       #00FF00  #285577
+client.focused          $bg-color        $bg-color        $text-color       #00FF00  #AAAAAA
 client.unfocused        $inact-bg-color  $inact-bg-color  $inact-text-color #00FF00  #222222
 client.focused_inactive $inact-bg-color  $inact-bg-color  $inact-text-color #00FF00  #5f676a
 client.urgent           $urgent-bg-color $urgent-bg-color $text-color       #00FF00  #0c0c0c
@@ -413,9 +417,11 @@ mode "focused" {
                 # hardcoded focus keybindings
                 bindsym b [class="(?i)chrome"] focus, mode "default" 
                 bindsym t [class="(?i)telegram"] focus, mode "default"
-                bindsym m [class="(?i)thunderbird"] focus
+                bindsym m [instance="^radio.yandex.ru"] focus, mode "default"
                 bindsym f [class="(?i)terminal" title="mc"] focus
                 bindsym z [class="(?i)zathura"] focus
+                bindsym s [class="(?i)steam"] focus, mode "default"
+                bindsym y [instance="^youtube.com"] focus, mode "default"
 
                 # keybindings for marking and jumping to clients
                 bindsym a exec i3-input -F 'mark %s' -P 'Mark name: '
