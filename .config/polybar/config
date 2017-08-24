@@ -39,7 +39,7 @@ padding-right = 1
 module-margin-right = 1
 module-margin-left = 0
 
-modules-right = xkeyboard battery volume2 redshift backlight
+modules-right = calendar battery volume2 redshift backlight xkeyboard
 modules-center = date2 weather
 modules-left = mpd xwindow
 
@@ -89,9 +89,9 @@ modules-left = menu0 cpu3 memory2 temperature
 modules-center = i3
 modules-right = filesystem bspwm wlan eth pkg
 
-tray-position =
+tray-position = right
 tray-padding = 0
-tray-transparent = true
+tray-transparent = false
 
 override-redirect = true
 
@@ -114,7 +114,7 @@ label-focused-foreground = #ffffff
 
 label-focused-font = 4
 label-unfocused-font = 4
-label-urgent-font = 4
+label-urgent-font = 6
 label-visible-font = 4 
 
 label-focused-padding = 1
@@ -122,7 +122,7 @@ label-focused-padding = 1
 label-unfocused-padding = 1
 label-unfocused-underlinde = ${colors.white}
 
-label-urgent-padding = 1
+label-urgent-padding 1= 1
 label-urgent-foreground = ${colors.red}
 
 label-visible-foreground = ${colors.white}
@@ -405,7 +405,7 @@ menu-2-1-exec = menu-open-0
 [module/date2]
 type = internal/date
 date-alt =   %A %H:%M 
-date =   %d %A %H:%M 
+date =   %d %A %H:%M 
 interval = 5
 ;format-underline = ${colors.white}
 ;format-background = ${colors.black}
@@ -565,7 +565,7 @@ type = custom/ipc
 hook-0 = echo "Files in ${HOME}: $(ls -1a ~ | wc -l)"
 hook-1 = whoami
 hook-2 = date +%s
-initial = 2
+initial = 1
 click-left = polybar-msg -p %pid% hook demo 1
 click-right = polybar-msg -p %pid% hook demo 2
 double-click-left = polybar-msg -p %pid% hook demo 3
@@ -580,5 +580,12 @@ exec = ~/.config/polybar/weather.sh
 
 [module/redshift]
 type = custom/script
-interval = 5
+interval = 60
 exec = ~/.config/polybar/redshift.sh
+
+[module/calendar]
+type = custom/script
+interval = 600
+format =  <label> 
+format-color = ${colors.red}
+exec =  gcalcli agenda --nocolor --nostarted | head -2 | tail -1

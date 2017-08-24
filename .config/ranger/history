@@ -1,5 +1,16 @@
-shell 
 nano
-delete
 shellqq
 scout -aefiklst 
+touch 
+mkdir 
+shell  %s
+rename Documents
+delete %s
+open_with 
+open_with
+rename Book.zip
+find 
+
+delete
+rename VirtualBox VMs
+shell 

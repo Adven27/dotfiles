@@ -485,6 +485,20 @@ class terminal(Command):
             command = 'xterm'
         self.fm.run(command, flags='f')
 
+class zsh(Command):
+    """:zsh
+
+    Spawns an "zsh" starting in the current directory.
+    """
+    def execute(self):
+        import os
+        from ranger.ext.get_executables import get_executables
+        command = os.environ.get('TERMCMD', os.environ.get('TERM'))
+        if command not in get_executables():
+            command = 'x-terminal-emulator'
+        if command not in get_executables():
+            command = 'xterm'
+        self.fm.run(command, flags='f')
 
 class delete(Command):
     """:delete
