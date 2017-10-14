@@ -29,7 +29,7 @@ bindsym $mod+n border normal
 # is used in the bar {} block below.
 #font xft:Noto Sans 10
 font pango:System San Francisco Display 10
-
+#font pango:Iosevka Nerd Font 10
 # Use Mouse+$mod to drag floating windows
 floating_modifier $mod
 
@@ -81,11 +81,15 @@ bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart du
 bindsym Print exec --no-startup-id i3-scrot
 bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
 bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
+bindsym --release $mod+p exec deepin-screenshot
 bindsym $mod+Shift+h exec xdg-open /usr/share/doc/manjaro/i3_help.pdf
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 bindsym $mod+x exec --no-startup-id xautolock -toggle;exec notify-send 'lock toggle'
 
 # focus_follows_mouse no
+
+# Auto start message applications I use with proper layout
+#exec --no-startup-id "i3-msg 'workspace 10; append_layout ~/.config/i3/workspaces/ws10.json'"
 
 # change focus
 bindsym $mod+j focus left
